@@ -53,6 +53,11 @@ function checkCookies(){
         eraseCookie("msg")
         return;
     }
+    if(readCookie("msg") == "error-create"){
+        coloredToast("danger", 'Error creating blog');
+        eraseCookie("msg")
+        return;
+    }
     if(readCookie("msg") == "login-successfull"){
         coloredToast("success", 'User Logged in successfully !');
         eraseCookie("msg")

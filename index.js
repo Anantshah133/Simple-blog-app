@@ -48,6 +48,16 @@ app.get("/create-blog", auth, (req, res) => {
     res.render("create-blog");
 })
 
+app.get("/blogs", auth, async (req, res)=>{
+    try {
+        const blogs = await Blog.find({});
+        console.log(blogs);
+        res.render("blogs", {blogs: blogs});
+    } catch (error) {
+        
+    }
+})
+
 app.post("/login", async (req, res) => {
     try {
         const { email, password } = req.body;
@@ -93,6 +103,9 @@ app.post("/create-blog", upload.single("image"), async (req, res) => {
         })
         if(blog){
             return res.redirect("/blogs");
+        } else {
+            res.cookie("msg", "error-create")
+            return res.redirect("/create-blog");
         }
     } catch (error) {
         console.log(`An error occured: ${error}`.red.bold)
