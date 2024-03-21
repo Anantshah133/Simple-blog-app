@@ -3,6 +3,10 @@
     color: rgb(37 99 235 / var(--tw-text-opacity)) !important;
 }
 
+.h-not-screen{
+    height: calc(100vh - 90px);
+}
+
 .bg-primary-600 {
     --tw-bg-opacity: 1;
     background-color: rgb(37 99 235 / var(--tw-bg-opacity)) !important;
@@ -69,7 +73,7 @@
     background-color: #e92b2b
 }
 
-.error-elem{
+.error-elem {
     color: red;
     font-size: 16px;
     font-weight: 600;
@@ -356,4 +360,9 @@
 .swal2-container .swal2-popup.swal2-toast.color-success {
     --tw-bg-opacity: 1;
     background-color: rgb(0 171 85/var(--tw-bg-opacity))
+}
+
+.ring-blue-600 {
+    --tw-ring-opacity: 1;
+    --tw-ring-color: rgb(37 99 235/var(--tw-ring-opacity));
 }
