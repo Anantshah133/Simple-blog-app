@@ -25,13 +25,13 @@ const auth = (req, res, next) => {
 
 app.get("/", (req, res) => {
     if (req.cookies.user) {
-        return res.redirect("/dashboard");
+        return res.redirect("/home");
     }
     res.redirect("/login");
 });
 
-app.get("/dashboard", auth, (req, res) => {
-    res.render("dashboard");
+app.get("/home", auth, (req, res) => {
+    res.render("index");
 })
 
 app.get("/login", (req, res) => {
