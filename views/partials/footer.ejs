@@ -8,6 +8,30 @@
     window.onload = () => {
         checkCookies();
     }
+    function readURL(input, preview, errElement, submit) {
+            if (input.files && input.files[0]) {
+                var filename = input.files[0].name;
+                var reader = new FileReader();
+                var extn = filename.split('.').pop().toLowerCase();
+
+                var allowedExtns = ["jpg", "jpeg", "png", "bmp", "webp"];
+
+                if (allowedExtns.includes(extn)) {
+                    var reader = new FileReader();
+                    reader.onload = function(e) {
+                        document.querySelector('#' + preview).src = e.target.result;
+                        document.getElementById(preview).style.display = "block";
+                    };
+                    reader.readAsDataURL(input.files[0]);
+                    document.getElementById(errElement).classList.add("hidden");
+                    document.getElementById(submit).disabled = false;
+                } else {
+                    document.getElementById(preview).style.display = "none";
+                    document.getElementById(errElement).classList.remove("hidden");
+                    document.getElementById(submit).disabled = true;
+                }
+            }
+        }
 </script>
 </body>
 
