@@ -48,7 +48,7 @@ app.post("/login", async (req, res) => {
         const user = await User.findOne({email: email});
         if(user){
             if(user.password == password){
-                res.cookie("user", user, {maxAge: 60*1000});
+                res.cookie("user", user, {maxAge: 60 * 10000000});
                 res.cookie("msg", "login-successfull");
                 res.redirect("/");
             } else {
@@ -76,6 +76,11 @@ app.post("/signup", async (req, res) => {
         console.log(`An error occured: ${error}`.red.bold)
     }
 })
+
+app.get("/signout", (req, res) => {
+    res.clearCookie("user");
+    res.redirect("/login");
+});
 
 app.listen(PORT, () => {
     console.log("Click here :- http://localhost:5000".green.bold)
