@@ -1,0 +1,9 @@
+.text-primary-600 {
+    --tw-text-opacity: 1;
+    color: rgb(37 99 235 / var(--tw-text-opacity)) !important;
+}
+
+.bg-primary-600 {
+    --tw-bg-opacity: 1;
+    background-color: rgb(37 99 235 / var(--tw-bg-opacity)) !important;
+}
