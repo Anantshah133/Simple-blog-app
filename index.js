@@ -51,12 +51,27 @@ app.get("/create-blog", auth, (req, res) => {
 app.get("/blogs", auth, async (req, res)=>{
     try {
         const blogs = await Blog.find({});
-        console.log(blogs);
         res.render("blogs", {blogs: blogs});
     } catch (error) {
-        
+        console.log(`An error occured : ${error}`.red.bold)
     }
 })
+
+app.get("/blogs/read/:id", auth, async (req, res) => {
+    try {
+        const id = req.params.id;
+        const blog = await Blog.findOne({_id: id});
+        if(blog){
+            console.log(blog);
+            res.render("single-blog", {blog});
+        } else {
+            res.cookie("msg", "error")
+            res.redirect("/blogs");
+        }
+    } catch (error) {
+        console.log(`An error occured : ${error}`.red.bold)
+    }
+});
 
 app.post("/login", async (req, res) => {
     try {
