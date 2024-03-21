@@ -31,7 +31,7 @@ coloredToast = (color, msg) => {
         toast: true,
         position: 'top-end',
         showConfirmButton: false,
-        timer: 3000,
+        timer: 100000,
         showCloseButton: true,
         customClass: {
             popup: `color-${color}`

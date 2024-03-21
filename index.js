@@ -25,7 +25,7 @@ const auth = (req, res, next) => {
 
 app.get("/", (req, res) => {
     if (req.cookies.user) {
-        res.redirect("/dashboard");
+        return res.redirect("/dashboard");
     }
     res.redirect("/login");
 });
