@@ -18,8 +18,8 @@
                 </div>
                 <div>
                     <div>
-                        <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white" for="file_input">Upload file</label>
-                        <input class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50" aria-describedby="file_input_help" id="file_input" type="file" onchange="readURL(this, 'blogImg', 'blogImgErr', 'save')">
+                        <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white" for="image">Upload file</label>
+                        <input class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50" aria-describedby="image" name="image" id="image" type="file" onchange="readURL(this, 'blogImg', 'blogImgErr', 'save')">
                         <img src="" class="hidden mt-5 w-80 preview-img" alt="Blog Image" id="blogImg">
                         <p class="mt-2 text-base text-red-600 font-semibold hidden" id="blogImgErr">Please upload image in valid form</p>
                     </div>

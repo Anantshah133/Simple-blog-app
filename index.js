@@ -4,8 +4,10 @@ const bodyParser = require("body-parser");
 const { PORT } = require("./src/config/config");
 const connectDb = require("./src/config/db-connect");
 const cookieParser = require("cookie-parser");
-const User = require('./src/models/User');
 const app = express();
+const upload = require("./src/utils/multer");
+const User = require('./src/models/User');
+const Blog = require('./src/models/Blog');
 connectDb();
 
 app.set('view engine', 'ejs');
@@ -42,25 +44,25 @@ app.get("/signup", (req, res) => {
     res.render("signup");
 })
 
-app.get("/create-blog", (req, res)=>{
+app.get("/create-blog", auth, (req, res) => {
     res.render("create-blog");
 })
 
 app.post("/login", async (req, res) => {
     try {
         const { email, password } = req.body;
-        const user = await User.findOne({email: email});
-        if(user){
-            if(user.password == password){
-                res.cookie("user", user, {maxAge: 60 * 10000000});
+        const user = await User.findOne({ email: email });
+        if (user) {
+            if (user.password == password) {
+                res.cookie("user", user, { maxAge: 60 * 10000000 });
                 res.cookie("msg", "login-successfull");
                 res.redirect("/");
             } else {
-                res.cookie("msg", "incorrect-password", {maxAge: 60*1000});
+                res.cookie("msg", "incorrect-password", { maxAge: 60 * 1000 });
                 res.redirect("/login");
             }
         } else {
-            res.cookie("msg", "user-not-found", {maxAge: 60*1000});
+            res.cookie("msg", "user-not-found", { maxAge: 60 * 1000 });
             res.redirect("/login");
         }
     } catch (error) {
@@ -81,7 +83,23 @@ app.post("/signup", async (req, res) => {
     }
 })
 
-app.get("/signout", (req, res) => {
+app.post("/create-blog", upload.single("image"), async (req, res) => {
+    try {
+        const { title, description } = req.body;
+        const file = req.file;
+        const userCookie = req.cookies['user'];
+        const blog = await Blog.create({
+            title, description, image: file.filename, userName: userCookie.name
+        })
+        if(blog){
+            return res.redirect("/blogs");
+        }
+    } catch (error) {
+        console.log(`An error occured: ${error}`.red.bold)
+    }
+})
+
+app.get("/signout", auth, (req, res) => {
     res.clearCookie("user");
     res.redirect("/login");
 });
