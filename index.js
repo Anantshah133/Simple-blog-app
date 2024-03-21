@@ -42,6 +42,10 @@ app.get("/signup", (req, res) => {
     res.render("signup");
 })
 
+app.get("/create-blog", (req, res)=>{
+    res.render("create-blog");
+})
+
 app.post("/login", async (req, res) => {
     try {
         const { email, password } = req.body;
