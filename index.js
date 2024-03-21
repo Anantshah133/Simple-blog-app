@@ -49,6 +49,7 @@ app.post("/login", async (req, res) => {
         if(user){
             if(user.password == password){
                 res.cookie("user", user, {maxAge: 60*1000});
+                res.cookie("msg", "login-successfull");
                 res.redirect("/");
             } else {
                 res.cookie("msg", "incorrect-password", {maxAge: 60*1000});

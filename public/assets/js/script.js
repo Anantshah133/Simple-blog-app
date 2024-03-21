@@ -43,18 +43,18 @@ coloredToast = (color, msg) => {
 };
 
 function checkCookies(){
-    if(readCookie("msg") == "insert"){
-        coloredToast("success", 'Record Added Successfully !');
+    if(readCookie("msg") == "incorrect-password"){
+        coloredToast("danger", 'Incorrect Password Try Again');
         eraseCookie("msg")
         return;
     }
-    if(readCookie("msg") == "update"){
-        coloredToast("success", 'Record Updated Successfully !');
+    if(readCookie("msg") == "user-not-found"){
+        coloredToast("danger", 'No User found with this credentials');
         eraseCookie("msg")
         return;
     }
-    if(readCookie("msg") == "delete"){
-        coloredToast("danger", 'Record Deleted Successfully !');
+    if(readCookie("msg") == "login-successfull"){
+        coloredToast("success", 'User Logged in successfully !');
         eraseCookie("msg")
         return;
     }
